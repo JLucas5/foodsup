@@ -1,4 +1,4 @@
-const Food = require('../Models/Fodd')
+const Food = require('../Models/Food')
 const Restaurant = require('../Models/Restaurant')
 
 module.exports = {
@@ -8,13 +8,13 @@ module.exports = {
         const { food, description, price } = req.body
         const { restaurant_id } = req.headers
 
-        const user = await Restaurant.findById(restaurant_id)
+        const restaurant = await Restaurant.findById(restaurant_id)
 
-        if (!user) {
+        if (!restaurant) {
             return res.status(400).json({ error: "Restaurant does not exist" })
         }
 
-        const food = await Food.create({
+        const food_item = await Food.create({
             restaurant: restaurant_id,
             thumbnail: originalname,
             thumbnail_location: location,
@@ -23,6 +23,6 @@ module.exports = {
             price
         })
         
-        return res.json(food)
+        return res.json(food_item)
     }
 }
