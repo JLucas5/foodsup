@@ -13,6 +13,6 @@ routes.post('/sessions', SessionController.store)
 
 routes.post('/foods', upload.single('thumbnail'), FoodController.store)
 
-routes.get('/:name', MenuController.show)
+routes.get('/menu/:url', MenuController.show)
 
 module.exports = routes

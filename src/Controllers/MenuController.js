@@ -1,11 +1,16 @@
 const Food = require('../Models/Food')
+const Restaurant = require('../Models/Restaurant')
 
 module.exports = {
     async show(req, res){
-        const restaurantName = req.params.name
 
-        const food = await Food.find({ restaurantName: restaurantName})
 
-        return res.json(food)
+        const { url } = req.params
+
+        const { id } = await Restaurant.findOne({ url })
+
+        const foods = await Food.find({ restaurant : id })
+
+        return res.json(foods)
     }
 }
