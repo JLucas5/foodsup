@@ -9,7 +9,9 @@ const MenuController = require('./Controllers/MenuController')
 const routes = express.Router()
 const upload = multer(uploadConfig)
 
-routes.post('/sessions', SessionController.store)
+routes.post('/sessions', SessionController.register)
+
+routes.get('/sessions', SessionController.login)
 
 routes.post('/foods', upload.single('thumbnail'), FoodController.store)
 

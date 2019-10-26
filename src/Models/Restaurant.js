@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
 const RestaurantSchema = new mongoose.Schema({
    name: {
@@ -24,6 +25,13 @@ const RestaurantSchema = new mongoose.Schema({
       required: [true, 'Password required'],
       select: false
    }
+})
+
+RestaurantSchema.pre('save', async function(next){
+   const hash = await bcrypt.hash(this.password, 10)
+   this.password = hash
+   
+   next()
 })
 
 module.exports = mongoose.model('Restaurant', RestaurantSchema)

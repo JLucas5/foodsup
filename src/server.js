@@ -12,6 +12,7 @@ mongoose.connect('mongodb+srv://oministack:oministack@oministack-f1kph.mongodb.n
     useNewUrlParser: true,
     useUnifiedTopology: true 
 })
+mongoose.set('useCreateIndex', true);
 
 app.use(cors())
 app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')))
